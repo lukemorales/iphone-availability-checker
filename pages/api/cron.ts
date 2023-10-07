@@ -31,15 +31,13 @@ const appleResponse = z.object({
   }),
 });
 
-const IPHONE_MODELS = ["MU693LL/A", "MU6E3LL/A", "MU6J3LL/A"] as const;
+const LOCATION = "Chicago, IL";
 
 const [
   BLUE_TITANIUM_IPHONE_15_PRO_MAX_256,
   BLUE_TITANIUM_IPHONE_15_PRO_MAX_512,
   BLUE_TITANIUM_IPHONE_15_PRO_MAX_1024,
-] = IPHONE_MODELS;
-
-const LOCATION = "Chicago, IL";
+] = ["MU693LL/A", "MU6E3LL/A", "MU6J3LL/A"] as const;
 
 function missingEnv(name: string): never {
   throw new Error(`Missing environment variable: "${name}"`);
