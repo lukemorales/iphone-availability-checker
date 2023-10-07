@@ -1,20 +1,20 @@
-import ms from 'ms'
-import useSWR from 'swr'
+import ms from "ms";
+import useSWR from "swr";
 
 interface DataProps {
-  id: number
-  title: string
-  by: string
-  time: number
-  score: number
-  descendants: number
-  fetchedAt: number
+  id: number;
+  title: string;
+  by: string;
+  time: number;
+  score: number;
+  descendants: number;
+  fetchedAt: number;
 }
 
 export default function Post({ interval }: { interval: string }) {
-  const { data } = useSWR<DataProps>(`/api/data/${interval}`, (url) =>
+  const { data } = useSWR<DataProps>(`/api/cron/${interval}`, (url: string) =>
     fetch(url).then((res) => res.json())
-  )
+  );
 
   if (!data)
     return (
@@ -25,9 +25,9 @@ export default function Post({ interval }: { interval: string }) {
         </div>
         <div className="bg-gray-200 animate-pulse rounded-md w-28 h-4" />
       </div>
-    )
+    );
 
-  const { id, title, by, time, score, descendants, fetchedAt } = data || {}
+  const { id, title, by, time, score, descendants, fetchedAt } = data || {};
   return (
     <div className="flex justify-between items-center border border-gray-100 shadow-md rounded-lg p-5">
       <div className="grid gap-2">
@@ -47,7 +47,7 @@ export default function Post({ interval }: { interval: string }) {
             rel="noreferrer noopener"
             className="hover:underline hover:text-gray-800 transition-all"
           >
-            {score} {score === 1 ? 'point' : 'points'}
+            {score} {score === 1 ? "point" : "points"}
           </a>
           <p>by</p>
           <a
@@ -66,16 +66,16 @@ export default function Post({ interval }: { interval: string }) {
             rel="noreferrer noopener"
             className="hover:underline hover:text-gray-800 transition-all"
           >
-            {descendants} {descendants === 1 ? 'comment' : 'comments'}
+            {descendants} {descendants === 1 ? "comment" : "comments"}
           </a>
         </div>
       </div>
       <p className="text-gray-500 text-sm">fetched {timeAgo(fetchedAt)}</p>
     </div>
-  )
+  );
 }
 
 const timeAgo = (time: number): string => {
-  if (!time) return 'Never'
-  return `${ms(Date.now() - new Date(time).getTime())} ago`
-}
+  if (!time) return "Never";
+  return `${ms(Date.now() - new Date(time).getTime())} ago`;
+};
