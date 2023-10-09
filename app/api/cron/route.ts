@@ -3,9 +3,7 @@ import { delay } from "../delay";
 import { getEnv } from "../get-env";
 import { response } from "./schema";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 const CHICAGO = "Chicago, IL";
 const NEW_YORK = "New York, NY";
