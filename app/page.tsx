@@ -1,6 +1,5 @@
-import Post from "@/components/post";
-import { Code, Layout, Link, Page, Text } from "@vercel/examples-ui";
-import Head from "next/head";
+import { Code, Link, Page, Text } from "@vercel/examples-ui";
+import Post from "app/post";
 
 const intervals = [
   {
@@ -12,15 +11,17 @@ const intervals = [
 
 const image = "https://cron-template.vercel.app/thumbnail.png";
 
-export default function Home({ data }: { data: any }) {
+export const metadata = {
+  openGraph: { images: [image] },
+  twitter: { images: [image] },
+};
+
+export default function Home() {
   return (
     <Page>
-      <Head>
-        <meta property="og:image" content={image} />
-        <meta name="twitter:image" content={image} />
-      </Head>
       <section className="flex flex-col gap-6">
         <Text variant="h1">Vercel Cron Jobs Example</Text>
+
         <Text>
           This example shows you how you can use{" "}
           <Link
@@ -32,6 +33,7 @@ export default function Home({ data }: { data: any }) {
           </Link>{" "}
           to update data at different intervals.
         </Text>
+
         <Text>
           Each of the following sections are the{" "}
           <Link
@@ -60,6 +62,7 @@ export default function Home({ data }: { data: any }) {
           .
         </Text>
       </section>
+
       <section className="grid gap-6 mt-10 pt-10 border-t border-gray-300">
         <div className="flex flex-col gap-12">
           {intervals.map((interval) => (
@@ -68,7 +71,8 @@ export default function Home({ data }: { data: any }) {
                 <Text variant="h2">{interval.name}</Text>
                 <Code>{interval.cron}</Code>
               </div>
-              <Post interval={interval.id} />
+
+              <Post />
             </div>
           ))}
         </div>
@@ -76,5 +80,3 @@ export default function Home({ data }: { data: any }) {
     </Page>
   );
 }
-
-Home.Layout = Layout;

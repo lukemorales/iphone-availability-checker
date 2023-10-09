@@ -1,3 +1,5 @@
+"use client";
+
 import ms from "ms";
 import useSWR from "swr";
 
@@ -11,7 +13,7 @@ interface DataProps {
   fetchedAt: number;
 }
 
-export default function Post({ interval }: { interval: string }) {
+export default function Post() {
   const { data } = useSWR<DataProps>(`/api/cron`, (url: string) =>
     fetch(url).then((res) => res.json())
   );
@@ -28,6 +30,7 @@ export default function Post({ interval }: { interval: string }) {
     );
 
   const { id, title, by, time, score, descendants, fetchedAt } = data || {};
+
   return (
     <div className="flex justify-between items-center border border-gray-100 shadow-md rounded-lg p-5">
       <div className="grid gap-2">
